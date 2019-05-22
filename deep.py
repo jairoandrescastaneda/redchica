@@ -190,6 +190,7 @@ def trainingWithThreads():
 if __name__ == '__main__':
     entrenamiento()
     saveModel()
+    testDataTraining()
     
     """
     mp.set_start_method('spawn')
