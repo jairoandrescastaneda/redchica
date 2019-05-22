@@ -44,7 +44,7 @@ def initParallel():
 #if torch.cuda.device_count() > 1:
     #redneuronal = nn.DataParallel(redneuronal)
 
-torch.cuda.clear_memory_allocated()
+
 redneuronal.to(device)
 
 
@@ -100,7 +100,7 @@ def entrenamiento():
                 cantidadLosscalculado+=1
                 print('Me estoy entrenando en '+str(device))
                 print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
-                torch.cuda.empty_cache()
+                torch.cuda.empty_cache() 
             except Exception as e:
                 print(e)
         
