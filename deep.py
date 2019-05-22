@@ -98,9 +98,12 @@ def entrenamiento():
                 optimizador.step()
                 lossTotal+=loss.item()
                 cantidadLosscalculado+=1
-                print('Me estoy entrenando en '+str(device))
-                print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
-                torch.cuda.empty_cache() 
+                #print('Me estoy entrenando en '+str(device))
+                #print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
+                del data
+                del labels
+                del ouput
+                
             except Exception as e:
                 print(e)
         
@@ -114,6 +117,7 @@ def entrenamiento():
                 cantidadLosscalculado = 0
             except Exception as e:
                 print(e)
+        torch.cuda.empty_cache() 
 
 def testDataTraining():
     folderImagenes = Path('./imagentest')
