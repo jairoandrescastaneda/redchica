@@ -100,6 +100,7 @@ def entrenamiento():
                 cantidadLosscalculado+=1
                 print('Me estoy entrenando en '+str(device))
                 print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
+                torch.cuda.empty_cache()
             except Exception as e:
                 print(e)
         
