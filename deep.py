@@ -44,7 +44,7 @@ def initParallel():
 #if torch.cuda.device_count() > 1:
     #redneuronal = nn.DataParallel(redneuronal)
 
-
+torch.cuda.clear_memory_allocated()
 redneuronal.to(device)
 
 
