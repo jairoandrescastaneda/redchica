@@ -194,7 +194,7 @@ if __name__ == '__main__':
     
     
     mp.set_start_method('spawn')
-    number_process = 4
+    number_process = 2
 
     redneuronal.share_memory()
     process = []
