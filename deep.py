@@ -77,7 +77,7 @@ def loadClassesOfFolder():
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 2000
+    NUMBER_EPOCHS = 200
     LEARNING_RATIO = 1e-2
     lossFunction = nn.CrossEntropyLoss()
     optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO)
@@ -197,7 +197,7 @@ if __name__ == '__main__':
     
     
     mp.set_start_method('spawn')
-    number_process = 2
+    number_process = 4
 
     redneuronal.share_memory()
     process = []
@@ -211,6 +211,6 @@ if __name__ == '__main__':
         p.join()
     
     saveModel()
-    testDataTraining()
+    #testDataTraining()
 
     #saveModel()
