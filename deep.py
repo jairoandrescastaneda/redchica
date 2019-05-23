@@ -20,7 +20,7 @@ import torch.multiprocessing as mp
 
 
 tranformadaTraining = transforms.Compose([
-    transforms.Resize((960,720)),
+    transforms.Resize((256,256)),
     transforms.ToTensor(),
     transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))
 ])
@@ -30,7 +30,7 @@ dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tr
 dataLoaderTraining = DataLoader(dataTraining,batch_size=4,shuffle=False)
 
 clasesEntramiento = dataTraining.classes
-
+print(clasesEntramiento)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 redneuronal = Net()
@@ -99,10 +99,8 @@ def entrenamiento():
                 lossTotal+=loss.item()
                 cantidadLosscalculado+=1
                 #print('Me estoy entrenando en '+str(device))
-                #print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
-                del data
-                del labels
-                del ouput
+                print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
+              
                 
             except Exception as e:
                 print(e)
