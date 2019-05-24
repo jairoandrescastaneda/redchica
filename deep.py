@@ -119,9 +119,9 @@ def entrenamiento():
 
 def testDataTraining():
     folderImagenes = Path('./imagentest')
-    valorBaseImagen = 67600
-    valorWitdh = 260
-    valorHeight = 260
+    valorBaseImagen = 65536
+    valorWitdh = 256
+    valorHeight = 256
     for folder in folderImagenes.iterdir():
         imagen = cv2.imread(str(folder))
         if imagen.size<valorBaseImagen:
@@ -191,8 +191,9 @@ def trainingWithThreads():
 
 
 if __name__ == '__main__':
-    entrenamiento()
-    saveModel()
+    #entrenamiento()
+    #saveModel()
+    loadModel()
     testDataTraining()
     
     """
