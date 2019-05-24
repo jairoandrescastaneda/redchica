@@ -119,9 +119,9 @@ def entrenamiento():
 
 def testDataTraining():
     folderImagenes = Path('./imagentest')
-    valorBaseImagen = 2073600
-    valorWitdh = 720
-    valorHeight = 960
+    valorBaseImagen = 67600
+    valorWitdh = 260
+    valorHeight = 260
     for folder in folderImagenes.iterdir():
         imagen = cv2.imread(str(folder))
         if imagen.size<valorBaseImagen:
@@ -170,7 +170,7 @@ def loadModel():
 
 def trainingWithThreads():
     mp.set_start_method('spawn')
-    number_process = 3
+    number_process = 4
 
     redneuronal.share_memory()
     process = []
