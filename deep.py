@@ -99,7 +99,7 @@ def entrenamiento():
                 lossTotal+=loss.item()
                 cantidadLosscalculado+=1
                 #print('Me estoy entrenando en '+str(device))
-                print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
+                #print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
               
                 
             except Exception as e:
