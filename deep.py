@@ -27,7 +27,9 @@ tranformadaTraining = transforms.Compose([
 
 
 dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
-dataLoaderTraining = DataLoader(dataTraining,batch_size=4,shuffle=False)
+dataLoaderTraining = DataLoader(dataTraining,batch_size=136,shuffle=False)
+dataTesting = torchvision.datasets.ImageFolder('./imagentest',transform=tranformadaTraining)
+dataLoaderTesting = DataLoader(dataTesting,batch_size=4,shuffle=False)
 
 clasesEntramiento = dataTraining.classes
 print(clasesEntramiento)
@@ -77,7 +79,7 @@ def loadClassesOfFolder():
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 5000
+    NUMBER_EPOCHS = 1000
     LEARNING_RATIO = 1e-2
     lossFunction = nn.CrossEntropyLoss()
     optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO)
@@ -145,6 +147,15 @@ def testDataTraining():
 
 
 
+def testBase():
+    dataiter = iter(dataLoaderTesting)
+    for images,labels in dataiter:
+        ouput = redneuronal(Variable(images.to(device)))
+        _,prediccion = torch.max(ouput.data,1)
+        cantidadData = list(images.size())
+        for number in range(cantidadData[0]):
+            #print('el id de la imagen es   '+str(labels[number]))
+            print('la prediccion es '+str(clasesEntramiento[prediccion[number].item()]))
 
 
     
@@ -194,7 +205,7 @@ if __name__ == '__main__':
     entrenamiento()
     saveModel()
     #loadModel()
-    testDataTraining()
+    testBase()
     
     """
     mp.set_start_method('spawn')
