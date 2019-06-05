@@ -17,7 +17,9 @@ import matplotlib.pyplot as plt # for plotting
 from PIL import Image
 from readNeuronal import Net
 import torch.multiprocessing as mp
+from flask import Flask, request
 
+app = Flask(__name__)
 
 tranformadaTraining = transforms.Compose([
     transforms.Resize((256,256)),
@@ -28,7 +30,7 @@ tranformadaTraining = transforms.Compose([
 
 dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
 dataLoaderTraining = DataLoader(dataTraining,batch_size=136,shuffle=False)
-dataTesting = torchvision.datasets.ImageFolder('./imagentest',transform=tranformadaTraining)
+dataTesting = torchvision.datasets.ImageFolder('./imagentest2',transform=tranformadaTraining)
 dataLoaderTesting = DataLoader(dataTesting,batch_size=4,shuffle=False)
 
 clasesEntramiento = dataTraining.classes
@@ -149,6 +151,7 @@ def testDataTraining():
 
 def testBase():
     dataiter = iter(dataLoaderTesting)
+    predicciones = []
     for images,labels in dataiter:
         ouput = redneuronal(Variable(images.to(device)))
         _,prediccion = torch.max(ouput.data,1)
@@ -156,6 +159,8 @@ def testBase():
         for number in range(cantidadData[0]):
             #print('el id de la imagen es   '+str(labels[number]))
             print('la prediccion es '+str(clasesEntramiento[prediccion[number].item()]))
+            predicciones.append(clasesEntramiento[prediccion[number].item())
+    return predicciones
 
 
     
@@ -201,11 +206,26 @@ def trainingWithThreads():
 #testDataTraining()
 
 
+@app.route('/validar',methods=['POST','PUT'])
+def validaImagen():
+    if request.method == 'POST':
+        try:
+
+            f = request.files['imageprueba']
+            f.save('./imagentest2/test/prueba.jpg')
+            prediccion = testBase()
+            return "la predicion es "+str(prediccion[0])
+
+        except:
+            return "ha ocurrido un error"
+    return "Success"
+ 
+
 if __name__ == '__main__':
-    entrenamiento()
-    saveModel()
-    #loadModel()
-    testBase()
+    #entrenamiento()
+    #saveModel()
+    loadModel()
+    #testBase()
     
     """
     mp.set_start_method('spawn')
