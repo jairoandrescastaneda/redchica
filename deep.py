@@ -156,7 +156,7 @@ def testBase():
     for images,labels in dataiter:
         ouput = redneuronal(Variable(images.to(device)))
         _,prediccion = torch.max(ouput.data,1)
-        
+        print(ouput)
         print(prediccion)
         cantidadData = list(images.size())
         for number in range(cantidadData[0]):
